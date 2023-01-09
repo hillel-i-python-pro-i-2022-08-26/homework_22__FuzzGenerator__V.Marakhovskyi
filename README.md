@@ -6,7 +6,8 @@
 ![REPO](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 ## 👨‍💻 Homework
 
-Genrates all data and write it into different package files. App. time for generating 60 billions strs - 16-18 sec. on 12 CPUs. 
+Program genrates all data and write it into different package files. Approximate time for generating 60 billions strs - 16-18 sec. on 12 CPUs. 
+Quantity of CPU is dynamically selected, depends on machine where program starts.
 All packed in Docker.
 Argparse and variable qtty of generating data will add soon.
 
@@ -19,7 +20,7 @@ make homework-i-run
 ```
 
 
-### 🎬 Run
+### 🎬 Run in docker
 
 Run an application in Docker.
 
