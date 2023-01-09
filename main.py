@@ -3,7 +3,8 @@ import logging
 import multiprocessing
 import pathlib
 import string
-from typing import NamedTuple, Final, Iterator
+from typing import NamedTuple, Final
+from collections.abc import Iterator
 from custom_logger import CustomFormatter
 from math import ceil
 import time
@@ -136,5 +137,5 @@ if __name__ == "__main__":
     main()
     elapsed = time.perf_counter() - start
     logger.warning(f"Program completed in {elapsed:0.5f} seconds.")
-    logger.warning(f"Total generated packages: {qtty_of_packages}")
+    logger.warning(f"Total generated words: {total_number_of_words} Total generated packages: {qtty_of_packages}")
     logger.info(f"All data written to files in f'{outpath}")
