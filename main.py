@@ -8,7 +8,7 @@ from collections.abc import Iterator
 from custom_logger import CustomFormatter
 from math import ceil
 import time
-
+import argparse
 
 # Create logger
 logger = logging.getLogger(__name__)
@@ -54,7 +54,6 @@ def generate_words_for_current_package(
             )
         )
         word = "".join([alphabet[character_index] for character_index in word_as_digits])
-        # logger.info(f'{word}')
         number_of_start_word += 1
         list_of_package_words.append(word)
         if word == alphabet[-1] * word_length:
@@ -90,7 +89,7 @@ def write_to_file(list_of_package_words: list, file):
             f.write(f"{word}\n")
 
 
-def main():
+def main(word_length, alphabet):
     packages = [
         ActionArgs(
             alphabet=alphabet,
@@ -125,16 +124,22 @@ def main():
 
 
 if __name__ == "__main__":
+    CustomFormatter()
+
     alphabet = string.ascii_lowercase + string.digits
     alphabet_length = len(alphabet)
-    word_length = 5
-    total_number_of_words: Final[int] = len(alphabet) ** word_length
-    logger.warning(f"{alphabet=}, {word_length=}, {total_number_of_words=}")
-    qtty_of_items_in_package = 1000000
+
+    parser = argparse.ArgumentParser(description="Fuzz generator")
+    parser.add_argument("-word_len", type=int, help="Input length of word", required=False, default=5)
+    args = parser.parse_args()
+
+    total_number_of_words: Final[int] = len(alphabet) ** args.word_len
+    qtty_of_items_in_package = 1_000_000
     qtty_of_packages = ceil(total_number_of_words / qtty_of_items_in_package)
-    CustomFormatter()
+
     start = time.perf_counter()
-    main()
+    logger.warning(f"{alphabet=}, {args.word_len=}, {total_number_of_words=}")
+    main(word_length=args.word_len, alphabet=alphabet)
     elapsed = time.perf_counter() - start
     logger.warning(f"Program completed in {elapsed:0.5f} seconds.")
     logger.warning(f"Total generated words: {total_number_of_words} Total generated packages: {qtty_of_packages}")
